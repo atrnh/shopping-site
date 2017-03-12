@@ -3,45 +3,30 @@
 
 {% block body %}
 
+  {% if cart %}
     <table class="table table-striped">
-        <thead>
+      <thead>
         <tr>
-            <th>Melon Name</th>
-            <th>Quantity</th>
-            <th>Price</th>
-            <th>Total</th>
+          <th>Melon Name</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
         </tr>
-        </thead>
-        <tbody>
+      </thead>
+      <tbody>
+      {% for melon in cart %}
         <tr>
-            <td>Ancient Watermelon</td>
-            <td>5</td>
-            <td>$3.00</td>
-            <td>$15.00</td>
+          <td>{{ melon.common_name }}</td>
+          <td>{{ melon.quantity }}</td>
+          <td>{{ melon.price_str(melon.price) }}</td>
+          <td>{{ melon.price_str(melon.total) }}</td>
         </tr>
-        <tr>
-            <td>Charleston Gray</td>
-            <td>2</td>
-            <td>$2.00</td>
-            <td>$4.00</td>
-        </tr>
-        <tr>
-            <td>Crenshaw</td>
-            <td>1</td>
-            <td>$2.00</td>
-            <td>$2.00</td>
-        </tr>
-        <tr>
-            <td>Ledmon Watermelon</td>
-            <td>2</td>
-            <td>$3.00</td>
-            <td>$6.00</td>
-        </tr>
-        </tbody>
+      {% endfor %}
+      </tbody>
     </table>
 
     <h3>Total: $27.00</h3>
 
     <a href="/checkout" class="btn btn-large btn-primary">Check Out</a>
-
+  {% endif %}
 {% endblock %}
