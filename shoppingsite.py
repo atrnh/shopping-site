@@ -116,20 +116,6 @@ def process_login():
     dictionary, look up the user, and store them in the session.
     """
 
-    # TODO: Need to implement this!
-
-    # The logic here should be something like:
-    #
-    # - get user-provided name and password from request.form
-    # - use customers.get_by_email() to retrieve corresponding Customer
-    #   object (if any)
-    # - if a Customer with that email was found, check the provided password
-    #   against the stored one
-    # - if they match, store the user's email in the session, flash a success
-    #   message and redirect the user to the "/melons" route
-    # - if they don't, flash a failure message and redirect back to "/login"
-    # - do the same if a Customer with that email doesn't exist
-
     email = request.form.get('email')
     password = request.form.get('password')
 
@@ -148,6 +134,19 @@ def process_login():
         return redirect('/login')
 
     return 'Oops! This needs to be implemented'
+
+
+@app.route('/logout')
+def process_logout():
+    """Log user out of site.
+
+    Destroys session['user'].
+    """
+
+    del session['user']
+    flash('You have logged out. Goodbye!')
+
+    return redirect('/melons')
 
 
 @app.route('/checkout')
