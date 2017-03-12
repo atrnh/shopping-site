@@ -7,12 +7,12 @@ Authors: Joel Burton, Christian Fernandez, Meggie Mahnken, Katie Byers.
 """
 
 
-from flask import Flask, render_template, redirect, flash, session
+from flask import Flask, render_template, redirect, flash, session, request
 import jinja2
 
 import os
 
-import melons
+import melons, customers
 
 
 app = Flask(__name__)
@@ -131,6 +131,21 @@ def process_login():
     # - do the same if a Customer with that email doesn't exist
 
     email = request.form.get('email')
+    password = request.form.get('password')
+
+    try:
+        customer = customers.get_by_email(email)
+    except:
+        flash('A user with that email does not exist. Try again.')
+        return redirect('/login')
+
+    if password == customer.password:
+        session['user'] = email
+        flash('Welcome, {}!'.format(customer.first_name))
+        return redirect('/melons')
+    else:
+        flash('Invalid password for {}'.format(email))
+        return redirect('/login')
 
     return 'Oops! This needs to be implemented'
 
