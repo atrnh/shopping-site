@@ -62,24 +62,6 @@ def show_melon(melon_id):
 def show_shopping_cart():
     """Display content of shopping cart."""
 
-    # TODO: Display the contents of the shopping cart.
-
-    # The logic here will be something like:
-    #
-    # - get the cart dictionary from the session
-    # - create a list to hold melon objects and a variable to hold the total
-    #   cost of the order
-    # - loop over the cart dictionary, and for each melon id:
-    #    - get the corresponding Melon object
-    #    - compute the total cost for that type of melon
-    #    - add this to the order total
-    #    - add quantity and total cost as attributes on the Melon object
-    #    - add the Melon object to the list created above
-    # - pass the total order cost and the list of Melon objects to the template
-    #
-    # Make sure your function can also handle the case wherein no cart has
-    # been added to the session
-
     cart = []
     cart_total = 0
 
@@ -119,14 +101,14 @@ def add_to_cart(melon_id):
     return redirect('/cart')
 
 
-@app.route("/login", methods=["GET"])
+@app.route('/login', methods=['GET'])
 def show_login():
     """Show login form."""
 
-    return render_template("login.html")
+    return render_template('login.html')
 
 
-@app.route("/login", methods=["POST"])
+@app.route('/login', methods=['POST'])
 def process_login():
     """Log user into site.
 
@@ -148,19 +130,21 @@ def process_login():
     # - if they don't, flash a failure message and redirect back to "/login"
     # - do the same if a Customer with that email doesn't exist
 
-    return "Oops! This needs to be implemented"
+    email = request.form.get('email')
+
+    return 'Oops! This needs to be implemented'
 
 
-@app.route("/checkout")
+@app.route('/checkout')
 def checkout():
     """Checkout customer, process payment, and ship melons."""
 
     # For now, we'll just provide a warning. Completing this is beyond the
     # scope of this exercise.
 
-    flash("Sorry! Checkout will be implemented in a future version.")
-    return redirect("/melons")
+    flash('Sorry! Checkout will be implemented in a future version.')
+    return redirect('/melons')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
