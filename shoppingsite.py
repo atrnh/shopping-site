@@ -45,7 +45,7 @@ def list_melons():
                            melon_list=melon_list)
 
 
-@app.route("/melon/<melon_id>")
+@app.route('/melon/<melon_id>')
 def show_melon(melon_id):
     """Return page showing the details of a given melon.
 
@@ -58,7 +58,7 @@ def show_melon(melon_id):
                            display_melon=melon)
 
 
-@app.route("/cart")
+@app.route('/cart')
 def show_shopping_cart():
     """Display content of shopping cart."""
 
@@ -91,10 +91,12 @@ def show_shopping_cart():
 
             cart.append(melon)
             cart_total += melon.total
+    else:
+        flash('You have no items in your shopping cart!')
 
     return render_template('cart.html',
                            cart=cart,
-                           cart_total=cart_total)    
+                           cart_total=cart_total)
 
 
 @app.route('/add_to_cart/<melon_id>')
