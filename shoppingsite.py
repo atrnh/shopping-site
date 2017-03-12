@@ -125,15 +125,13 @@ def process_login():
         flash('A user with that email does not exist. Try again.')
         return redirect('/login')
 
-    if password == customer.password:
+    if customer.is_hashed_password(password):
         session['user'] = email
         flash('Welcome, {}!'.format(customer.first_name))
         return redirect('/melons')
     else:
         flash('Invalid password for {}'.format(email))
         return redirect('/login')
-
-    return 'Oops! This needs to be implemented'
 
 
 @app.route('/logout')
